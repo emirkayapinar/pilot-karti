@@ -66,7 +66,15 @@
       transform: translateY(24px);
       pointer-events: none;
     }
-    .isiklar-yaniyor body { overflow: hidden; } /* ışıklar yanarken kaydırma kapalı */
+    /* Işıklar yanarken alttaki bölümler sayfada hiç yer kaplamaz,
+       böylece telefonda da bilgisayarda da aşağı kaydırılamaz. */
+    .isiklar-yaniyor,
+    .isiklar-yaniyor body { overflow: hidden; height: 100%; overscroll-behavior: none; }
+    .isiklar-yaniyor main { display: none; }
+
+    /* Işıklar sönünce alttaki bölümler aşağıdan yukarı belirir */
+    main { animation: belir .8s cubic-bezier(.2, .8, .2, 1); }
+    @keyframes belir { from { opacity: 0; transform: translateY(24px); } }
 
     /* =========================================================
        3) ÜST BÖLÜM: START IŞIKLARI + PİLOT KARTI
@@ -197,6 +205,7 @@
     /* Animasyon istemeyen kullanıcılar için hareketi kapat */
     @media (prefers-reduced-motion: reduce) {
       .gizli { transition: none; }
+      main { animation: none; }
     }
   </style>
 </head>
@@ -229,7 +238,7 @@
 </header>
 
 <!-- Işıklar sönene kadar aşağıdaki her şey gizli (.gizli) -->
-<main class="gizli">
+<main>
   <div class="kerb"></div>
 
   <!-- ================= GARAJIM ================= -->
