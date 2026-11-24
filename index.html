@@ -22,18 +22,14 @@
        ========================================================= */
     :root {
       color-scheme: light dark;
-      /* Red Bull esintili renkler: lacivert, kırmızı, sarı */
-      --lacivert:   #0a1f44;
-      --lacivert-koyu: #061430;
+      --zemin:      light-dark(#f3f2ef, #16171b);
+      --panel:      light-dark(#ffffff, #202227);
+      --yazi:       light-dark(#141518, #f4f4f2);
+      --soluk:      light-dark(#5b5e66, #a7aab2);
+      --cizgi:      light-dark(#dcdad4, #33363d);
       --kirmizi:    #db0a40;
-      --sari:       #ffc906;
-      --zemin:      light-dark(#f2f4f8, #0b1530);
-      --panel:      light-dark(#ffffff, #13224a);
-      --yazi:       light-dark(#0a1f44, #f4f6fb);
-      --soluk:      light-dark(#4a5672, #a9b4cf);
-      --cizgi:      light-dark(#d6dbe6, #24345e);
       --kirmizi-yazi: light-dark(#c10838, #ff5a7e);
-      --asfalt:     var(--lacivert);
+      --asfalt:     #1b1c20;
     }
     :root[data-theme=light] { color-scheme: light; }
     :root[data-theme=dark]  { color-scheme: dark; }
@@ -56,7 +52,7 @@
     .kutu-genislik { max-width: 1140px; margin: 0 auto; }
 
     /* Pist kenarı: kırmızı-beyaz şerit */
-    .kerb { height: 14px; background: repeating-linear-gradient(90deg, var(--kirmizi) 0 28px, var(--sari) 28px 56px); }
+    .kerb { height: 14px; background: repeating-linear-gradient(90deg, var(--kirmizi) 0 28px, #fff 28px 56px); }
 
     /* =========================================================
        2) IŞIKLAR SÖNMEDEN İÇERİĞİ GİZLE
@@ -76,28 +72,28 @@
        3) ÜST BÖLÜM: START IŞIKLARI + PİLOT KARTI
        ========================================================= */
     .ust {
-      background: radial-gradient(120% 80% at 50% 0%, #1b3570 0%, var(--lacivert) 55%, var(--lacivert-koyu) 100%);
+      background: radial-gradient(120% 80% at 50% 0%, #2e3038 0%, var(--asfalt) 60%);
       color: #f4f4f2;
       padding-bottom: clamp(40px, 6vw, 80px);
     }
 
     /* Start ışıkları: 5 sütun, her sütunda 2 lamba */
     .isiklar { display: flex; gap: clamp(8px, 2vw, 18px); justify-content: center; padding: 28px 0 6px; }
-    .sutun   { background: #040b1c; border-radius: 14px; padding: 10px 8px; display: grid; gap: 8px; box-shadow: 0 6px 18px #0008; }
+    .sutun   { background: #0d0d10; border-radius: 14px; padding: 10px 8px; display: grid; gap: 8px; box-shadow: 0 6px 18px #0008; }
     .lamba   { width: clamp(26px, 5vw, 44px); aspect-ratio: 1; border-radius: 50%; background: #2a0705; box-shadow: inset 0 -4px 8px #0009; }
     .lamba.yandi {
       background: radial-gradient(circle at 35% 30%, #ff8aa5, #db0a40 55%, #7a0020);
       box-shadow: 0 0 22px #ff1f55, inset 0 -4px 8px #0006;
     }
-    .start-yazisi { text-align: center; font: 700 clamp(15px, 2vw, 18px)/1.2 "Titillium Web"; color: var(--sari); min-height: 24px; margin: 8px 0 26px; }
+    .start-yazisi { text-align: center; font: 700 clamp(15px, 2vw, 18px)/1.2 "Titillium Web"; color: #c9cbd1; min-height: 24px; margin: 8px 0 26px; }
 
     /* Pilot kartı: solda kırmızı numara paneli, sağda bilgiler */
     .kart {
       max-width: 880px; margin: 0 auto;
-      background: linear-gradient(135deg, #16295a, #0c1b3e);
-      border: 1px solid #2a3f74; border-radius: 22px; overflow: hidden;
+      background: linear-gradient(135deg, #2a2c33, #1f2026);
+      border: 1px solid #3a3d45; border-radius: 22px; overflow: hidden;
       display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-      box-shadow: 0 30px 60px #000a;
+      box-shadow: 0 30px 60px #0009;
     }
 
     /* Sol panel: kırmızı zemin, çapraz hız çizgileri, büyük numara, damalı bayrak */
@@ -119,20 +115,20 @@
       color: #fff; letter-spacing: -.04em; text-shadow: 6px 6px 0 #00000040;
       transform: skewX(-6deg); padding: 0 .08em;
     }
-    .panel-ust  { position: absolute; top: 18px; left: 20px; right: 20px; display: flex; justify-content: space-between; font: 700 14px "Titillium Web"; color: var(--sari); }
+    .panel-ust  { position: absolute; top: 18px; left: 20px; right: 20px; display: flex; justify-content: space-between; font: 700 14px "Titillium Web"; color: #ffffffd0; }
     .panel-isim { position: absolute; bottom: 36px; left: 0; right: 0; text-align: center; font: 900 26px/1 "Titillium Web"; color: #fff; letter-spacing: .18em; }
 
     /* Sağ taraf: isim, takım, cümle ve 3 küçük bilgi kutusu */
     .bilgi { padding: clamp(20px, 3vw, 34px); display: flex; flex-direction: column; gap: 14px; }
-    .kod   { display: inline-flex; gap: 10px; align-items: center; font-weight: 700; color: var(--sari); font-size: 15px; }
+    .kod   { display: inline-flex; gap: 10px; align-items: center; font-weight: 700; color: #ff6b8e; font-size: 15px; }
     .kod b { background: var(--kirmizi); color: #fff; padding: 2px 10px; border-radius: 6px; font-size: 18px; }
     .bilgi h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.02; margin: 0; font-weight: 900; text-wrap: balance; }
     .bilgi p  { margin: 0; }
-    .takim    { color: #c3cce3; }
+    .takim    { color: #c9cbd1; }
     .ozellikler { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: auto; }
     .ozellik        { background: #ffffff0d; border: 1px solid #ffffff14; border-radius: 12px; padding: 10px 12px; }
-    .ozellik span   { display: block; font-size: 13px; color: #a9b4cf; }
-    .ozellik strong { font: 700 17px/1.25 "Titillium Web"; color: var(--sari); }
+    .ozellik span   { display: block; font-size: 13px; color: #a7aab2; }
+    .ozellik strong { font: 700 17px/1.25 "Titillium Web"; }
 
     /* =========================================================
        4) GARAJIM: 4 kutu
@@ -177,8 +173,7 @@
        ========================================================= */
     .siradaki { background: var(--asfalt); color: #f4f4f2; }
     .siradaki .kutu-genislik { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px; align-items: center; }
-    .siradaki p { color: #c3cce3; }
-    .siradaki h2 { color: var(--sari); }
+    .siradaki p { color: #c9cbd1; }
     .bayrak {
       aspect-ratio: 4 / 3; border-radius: 16px; box-shadow: 0 20px 40px #0008;
       background-image: conic-gradient(#fff 25%, #111 0 50%, #fff 0 75%, #111 0); background-size: 56px 56px;
