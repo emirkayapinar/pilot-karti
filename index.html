@@ -1,212 +1,371 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Emir · Pilot Kartı</title>
-<meta name="description" content="Mustafa Emir Kayapınar · Sakarya Üniversitesi · F1 temalı pilot kartı">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-/* VOICE: kendinden emin, enerjik, samimi; bir öğrencinin kendi pilot kartı
-   IDEA: F1 pilot tanıtım kartı + start ışıkları + yarış geçmişi
-   PICTURE: dev pilot kartı (numara, kask, isim, takım) start ışıklarının altında
-   COLOUR and TYPE: asfalt grisi zemin, beyaz, yarış kırmızısı #e10600, kerb şeridi; Titillium Web + Inter
-   LAYOUT: tam genişlik bantlar; kart üstte, garaj ızgarası, yarış geçmişi çizgisi, sıradaki yarış */
-:root{color-scheme:light dark;
-  --bg:light-dark(#f3f2ef,#16171b);--panel:light-dark(#ffffff,#202227);--ink:light-dark(#141518,#f4f4f2);
-  --mute:light-dark(#5b5e66,#a7aab2);--line:light-dark(#dcdad4,#33363d);--red:#e10600;--redink:light-dark(#c00500,#ff4a3d);
-  --asph:#1b1c20;--asph2:#26282e}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
-*{box-sizing:border-box;min-width:0}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
-h1,h2,h3,.num,.code{font-family:"Titillium Web",Inter,sans-serif}
-h2{font-size:clamp(28px,4vw,40px);line-height:1.05;margin:0 0 8px;text-wrap:balance;font-weight:900}
-.lead{color:var(--mute);max-width:62ch;margin:0 0 28px}
-.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}
-.wrap{max-width:1140px;margin:0 auto}
-.kerb{height:14px;background:repeating-linear-gradient(90deg,var(--red) 0 28px,#fff 28px 56px)}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Emir · Pilot Kartı</title>
+  <meta name="description" content="Mustafa Emir Kayapınar · Sakarya Üniversitesi · F1 temalı pilot kartı">
 
-/* HERO */
-.hero{background:radial-gradient(120% 80% at 50% 0%,#2e3038 0%,var(--asph) 60%);color:#f4f4f2;padding-bottom:clamp(40px,6vw,80px)}
-.lights{display:flex;gap:clamp(8px,2vw,18px);justify-content:center;padding:28px 0 6px}
-.pod{background:#0d0d10;border-radius:14px;padding:10px 8px;display:grid;gap:8px;box-shadow:0 6px 18px #0008}
-.l{width:clamp(26px,5vw,44px);aspect-ratio:1;border-radius:50%;background:#2a0705;box-shadow:inset 0 -4px 8px #0009}
-.l.on{background:radial-gradient(circle at 35% 30%,#ff8a80,#e10600 55%,#7a0300);box-shadow:0 0 22px #ff2a1a,inset 0 -4px 8px #0006}
-.go{text-align:center;font:700 clamp(15px,2vw,18px)/1.2 "Titillium Web";letter-spacing:.02em;color:#c9cbd1;min-height:24px;margin:8px 0 26px}
-.card{max-width:880px;margin:0 auto;background:linear-gradient(135deg,#2a2c33,#1f2026);border:1px solid #3a3d45;border-radius:22px;
-  overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);box-shadow:0 30px 60px #0009;
-  transform:translateY(24px);opacity:0;transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .8s}
-.card.in{transform:none;opacity:1}
-.photo{position:relative;background:linear-gradient(150deg,#ff2a1a 0%,#e10600 45%,#7a0300 100%);min-height:340px;display:grid;place-items:center;overflow:hidden;isolation:isolate}
-.photo::before{content:"";position:absolute;inset:-20%;z-index:-1;
-  background:repeating-linear-gradient(115deg,transparent 0 46px,#ffffff14 46px 50px,transparent 50px 64px,#00000022 64px 70px)}
-.photo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22px;
-  background:conic-gradient(#fff 25%,#111 0 50%,#fff 0 75%,#111 0) 0 0/22px 22px}
-.photo .num{font-size:clamp(150px,22vw,230px);font-weight:900;font-style:italic;line-height:.8;color:#fff;letter-spacing:-.04em;
-  text-shadow:6px 6px 0 #00000040;transform:skewX(-6deg);padding:0 .08em}
-.photo .tagline{position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;font:700 14px "Titillium Web";color:#ffffffd0}
-.photo .drv{position:absolute;bottom:36px;left:0;right:0;text-align:center;font:900 26px/1 "Titillium Web";color:#fff;letter-spacing:.18em}
-.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
-.info{padding:clamp(20px,3vw,34px);display:flex;flex-direction:column;gap:14px}
-.code{display:inline-flex;gap:10px;align-items:center;font-weight:700;color:#ff6b61;font-size:15px}
-.code b{background:var(--red);color:#fff;padding:2px 10px;border-radius:6px;font-size:18px}
-.info h1{font-size:clamp(34px,5vw,52px);line-height:1.02;margin:0;font-weight:900;text-wrap:balance}
-.team{color:#c9cbd1;margin:0}
-.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:auto}
-.fact{background:#ffffff0d;border:1px solid #ffffff14;border-radius:12px;padding:10px 12px}
-.fact span{display:block;font-size:13px;color:#a7aab2}
-.fact strong{font:700 17px/1.25 "Titillium Web"}
-.todo{outline:2px dashed #ffd23f;outline-offset:2px;border-radius:4px}
+  <!-- Yazı tipleri (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-/* GARAJ */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
-.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
-.box .ic{width:44px;height:44px;border-radius:12px;background:var(--red);display:grid;place-items:center;margin-bottom:12px}
-.box .ic svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.box h3{margin:0 0 4px;font-size:22px;font-weight:700}
-.box p{margin:0;color:var(--mute)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.chips span{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px}
+  <!-- Sayfa açılır açılmaz "ışıklar sönmeden içerik görünmesin" modunu aç.
+       JavaScript çalışmazsa bu sınıf eklenmez ve içerik normal görünür. -->
+  <script>document.documentElement.classList.add('isiklar-yaniyor');</script>
 
-/* YARIŞ GEÇMİŞİ */
-.track{list-style:none;margin:0;padding:0;position:relative}
-.track::before{content:"";position:absolute;left:19px;top:6px;bottom:6px;width:4px;border-radius:4px;
-  background:repeating-linear-gradient(180deg,var(--red) 0 18px,var(--line) 18px 36px)}
-.track li{position:relative;padding:0 0 26px 62px}
-.track li::before{content:attr(data-lap);position:absolute;left:0;top:0;width:42px;height:42px;border-radius:50%;
-  background:var(--panel);border:3px solid var(--red);display:grid;place-items:center;font:700 14px "Titillium Web";color:var(--redink)}
-.track .when{font:700 14px "Titillium Web";color:var(--redink)}
-.track h3{margin:0 0 2px;font-size:21px}
-.track p{margin:0;color:var(--mute);max-width:64ch}
+  <style>
+    /* =========================================================
+       1) RENKLER VE TEMEL AYARLAR
+       Açık ve koyu temada çalışır: light-dark(açık, koyu)
+       ========================================================= */
+    :root {
+      color-scheme: light dark;
+      --zemin:      light-dark(#f3f2ef, #16171b);
+      --panel:      light-dark(#ffffff, #202227);
+      --yazi:       light-dark(#141518, #f4f4f2);
+      --soluk:      light-dark(#5b5e66, #a7aab2);
+      --cizgi:      light-dark(#dcdad4, #33363d);
+      --kirmizi:    #e10600;
+      --kirmizi-yazi: light-dark(#c00500, #ff4a3d);
+      --asfalt:     #1b1c20;
+    }
+    :root[data-theme=light] { color-scheme: light; }
+    :root[data-theme=dark]  { color-scheme: dark; }
 
-/* SÜREÇ */
-.laps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:10px}
-.lap{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;font-size:14px}
-.lap b{display:block;font:900 22px "Titillium Web";color:var(--redink)}
-.lap.now{background:var(--red);color:#fff;border-color:var(--red)}.lap.now b{color:#fff}
+    * { box-sizing: border-box; min-width: 0; }
 
-/* SIRADAKİ YARIŞ */
-.next{background:var(--asph);color:#f4f4f2}
-.next .wrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:center}
-.next p{color:#c9cbd1}
-.flag{aspect-ratio:4/3;border-radius:16px;background-image:conic-gradient(#fff 25%,#111 0 50%,#fff 0 75%,#111 0);background-size:56px 56px;
-  box-shadow:0 20px 40px #0008;transform:perspective(600px) rotateY(-14deg)}
-footer{text-align:center;color:var(--mute);font-size:13px;padding:22px 16px}
-.drop{display:inline-block;margin-top:8px;font-size:13px;color:#c9cbd1;cursor:pointer;text-decoration:underline}
-.drop input{display:none}
+    body {
+      margin: 0;
+      background: var(--zemin);
+      color: var(--yazi);
+      font: 16px/1.6 Inter, system-ui, sans-serif;
+      overflow-x: clip;
+    }
 
-@media(max-width:720px){.card{grid-template-columns:1fr}.photo{min-height:260px}.next .wrap{grid-template-columns:1fr}.laps{grid-template-columns:repeat(2,minmax(0,1fr))}.laps .lap:last-child{grid-column:1/-1}}
-@media(max-width:420px){.facts{grid-template-columns:1fr 1fr}}
-@media(prefers-reduced-motion:reduce){.card{transition:none;transform:none;opacity:1}}
-</style>
+    h1, h2, h3, .numara, .kod { font-family: "Titillium Web", Inter, sans-serif; }
+    h2 { font-size: clamp(28px, 4vw, 40px); line-height: 1.05; margin: 0 0 8px; font-weight: 900; text-wrap: balance; }
+
+    .giris  { color: var(--soluk); max-width: 62ch; margin: 0 0 28px; }
+    .bant   { padding: clamp(28px, 4vw, 64px) max(5vw, 16px); }
+    .kutu-genislik { max-width: 1140px; margin: 0 auto; }
+
+    /* Pist kenarı: kırmızı-beyaz şerit */
+    .kerb { height: 14px; background: repeating-linear-gradient(90deg, var(--kirmizi) 0 28px, #fff 28px 56px); }
+
+    /* =========================================================
+       2) IŞIKLAR SÖNMEDEN İÇERİĞİ GİZLE
+       .gizli sınıfı olan her şey, ışıklar sönene kadar görünmez.
+       ========================================================= */
+    .gizli {
+      transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1);
+    }
+    .isiklar-yaniyor .gizli {
+      opacity: 0;
+      transform: translateY(24px);
+      pointer-events: none;
+    }
+    .isiklar-yaniyor body { overflow: hidden; } /* ışıklar yanarken kaydırma kapalı */
+
+    /* =========================================================
+       3) ÜST BÖLÜM: START IŞIKLARI + PİLOT KARTI
+       ========================================================= */
+    .ust {
+      background: radial-gradient(120% 80% at 50% 0%, #2e3038 0%, var(--asfalt) 60%);
+      color: #f4f4f2;
+      padding-bottom: clamp(40px, 6vw, 80px);
+    }
+
+    /* Start ışıkları: 5 sütun, her sütunda 2 lamba */
+    .isiklar { display: flex; gap: clamp(8px, 2vw, 18px); justify-content: center; padding: 28px 0 6px; }
+    .sutun   { background: #0d0d10; border-radius: 14px; padding: 10px 8px; display: grid; gap: 8px; box-shadow: 0 6px 18px #0008; }
+    .lamba   { width: clamp(26px, 5vw, 44px); aspect-ratio: 1; border-radius: 50%; background: #2a0705; box-shadow: inset 0 -4px 8px #0009; }
+    .lamba.yandi {
+      background: radial-gradient(circle at 35% 30%, #ff8a80, #e10600 55%, #7a0300);
+      box-shadow: 0 0 22px #ff2a1a, inset 0 -4px 8px #0006;
+    }
+    .start-yazisi { text-align: center; font: 700 clamp(15px, 2vw, 18px)/1.2 "Titillium Web"; color: #c9cbd1; min-height: 24px; margin: 8px 0 26px; }
+
+    /* Pilot kartı: solda kırmızı numara paneli, sağda bilgiler */
+    .kart {
+      max-width: 880px; margin: 0 auto;
+      background: linear-gradient(135deg, #2a2c33, #1f2026);
+      border: 1px solid #3a3d45; border-radius: 22px; overflow: hidden;
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+      box-shadow: 0 30px 60px #0009;
+    }
+
+    /* Sol panel: kırmızı zemin, çapraz hız çizgileri, büyük numara, damalı bayrak */
+    .numara-paneli {
+      position: relative; isolation: isolate; overflow: hidden;
+      min-height: 340px; display: grid; place-items: center;
+      background: linear-gradient(150deg, #ff2a1a 0%, #e10600 45%, #7a0300 100%);
+    }
+    .numara-paneli::before {         /* hız çizgileri */
+      content: ""; position: absolute; inset: -20%; z-index: -1;
+      background: repeating-linear-gradient(115deg, transparent 0 46px, #ffffff14 46px 50px, transparent 50px 64px, #00000022 64px 70px);
+    }
+    .numara-paneli::after {          /* damalı bayrak şeridi */
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px;
+      background: conic-gradient(#fff 25%, #111 0 50%, #fff 0 75%, #111 0) 0 0 / 22px 22px;
+    }
+    .numara {
+      font-size: clamp(150px, 22vw, 230px); font-weight: 900; font-style: italic; line-height: .8;
+      color: #fff; letter-spacing: -.04em; text-shadow: 6px 6px 0 #00000040;
+      transform: skewX(-6deg); padding: 0 .08em;
+    }
+    .panel-ust  { position: absolute; top: 18px; left: 20px; right: 20px; display: flex; justify-content: space-between; font: 700 14px "Titillium Web"; color: #ffffffd0; }
+    .panel-isim { position: absolute; bottom: 36px; left: 0; right: 0; text-align: center; font: 900 26px/1 "Titillium Web"; color: #fff; letter-spacing: .18em; }
+
+    /* Sağ taraf: isim, takım, cümle ve 3 küçük bilgi kutusu */
+    .bilgi { padding: clamp(20px, 3vw, 34px); display: flex; flex-direction: column; gap: 14px; }
+    .kod   { display: inline-flex; gap: 10px; align-items: center; font-weight: 700; color: #ff6b61; font-size: 15px; }
+    .kod b { background: var(--kirmizi); color: #fff; padding: 2px 10px; border-radius: 6px; font-size: 18px; }
+    .bilgi h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.02; margin: 0; font-weight: 900; text-wrap: balance; }
+    .bilgi p  { margin: 0; }
+    .takim    { color: #c9cbd1; }
+    .ozellikler { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: auto; }
+    .ozellik        { background: #ffffff0d; border: 1px solid #ffffff14; border-radius: 12px; padding: 10px 12px; }
+    .ozellik span   { display: block; font-size: 13px; color: #a7aab2; }
+    .ozellik strong { font: 700 17px/1.25 "Titillium Web"; }
+
+    /* =========================================================
+       4) GARAJIM: 4 kutu
+       ========================================================= */
+    .izgara { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; }
+    .kutu   { background: var(--panel); border: 1px solid var(--cizgi); border-radius: 16px; padding: 22px; }
+    .kutu h3 { margin: 0 0 4px; font-size: 22px; font-weight: 700; }
+    .kutu p  { margin: 0; color: var(--soluk); }
+    .ikon { width: 44px; height: 44px; border-radius: 12px; background: var(--kirmizi); display: grid; place-items: center; margin-bottom: 12px; }
+    .ikon svg { width: 24px; height: 24px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .etiketler { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .etiketler span { border: 1px solid var(--cizgi); border-radius: 999px; padding: 4px 12px; font-size: 14px; }
+
+    /* =========================================================
+       5) YARIŞ GEÇMİŞİM: dikey zaman çizgisi
+       ========================================================= */
+    .pist { list-style: none; margin: 0; padding: 0; position: relative; }
+    .pist::before {
+      content: ""; position: absolute; left: 19px; top: 6px; bottom: 6px; width: 4px; border-radius: 4px;
+      background: repeating-linear-gradient(180deg, var(--kirmizi) 0 18px, var(--cizgi) 18px 36px);
+    }
+    .pist li { position: relative; padding: 0 0 26px 62px; }
+    .pist li::before {               /* T1, T2... tur rozetleri */
+      content: attr(data-tur); position: absolute; left: 0; top: 0; width: 42px; height: 42px; border-radius: 50%;
+      background: var(--panel); border: 3px solid var(--kirmizi); display: grid; place-items: center;
+      font: 700 14px "Titillium Web"; color: var(--kirmizi-yazi);
+    }
+    .pist .tarih { font: 700 14px "Titillium Web"; color: var(--kirmizi-yazi); }
+    .pist h3 { margin: 0 0 2px; font-size: 21px; }
+    .pist p  { margin: 0; color: var(--soluk); max-width: 64ch; }
+
+    /* Başvuru aşamaları */
+    .sezon-baslik { font: 700 22px "Titillium Web"; margin: 18px 0 0; }
+    .turlar { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+    .tur    { background: var(--panel); border: 1px solid var(--cizgi); border-radius: 12px; padding: 12px; text-align: center; font-size: 14px; }
+    .tur b  { display: block; font: 900 22px "Titillium Web"; color: var(--kirmizi-yazi); }
+    .tur.simdi   { background: var(--kirmizi); color: #fff; border-color: var(--kirmizi); }
+    .tur.simdi b { color: #fff; }
+
+    /* =========================================================
+       6) SIRADAKİ YARIŞIM + ALT BİLGİ
+       ========================================================= */
+    .siradaki { background: var(--asfalt); color: #f4f4f2; }
+    .siradaki .kutu-genislik { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px; align-items: center; }
+    .siradaki p { color: #c9cbd1; }
+    .bayrak {
+      aspect-ratio: 4 / 3; border-radius: 16px; box-shadow: 0 20px 40px #0008;
+      background-image: conic-gradient(#fff 25%, #111 0 50%, #fff 0 75%, #111 0); background-size: 56px 56px;
+      transform: perspective(600px) rotateY(-14deg);
+    }
+    footer { text-align: center; color: var(--soluk); font-size: 13px; padding: 22px 16px; }
+
+    /* =========================================================
+       7) TELEFON VE TABLET AYARLARI
+       ========================================================= */
+    @media (max-width: 720px) {
+      .kart { grid-template-columns: 1fr; }
+      .numara-paneli { min-height: 260px; }
+      .siradaki .kutu-genislik { grid-template-columns: 1fr; }
+      .turlar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .turlar .tur:last-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 420px) {
+      .ozellikler { grid-template-columns: 1fr 1fr; }
+    }
+    /* Animasyon istemeyen kullanıcılar için hareketi kapat */
+    @media (prefers-reduced-motion: reduce) {
+      .gizli { transition: none; }
+    }
+  </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="lights" aria-hidden="true" id="lights"></div>
-  <p class="go" id="go" aria-live="polite">&nbsp;</p>
+<!-- ================= ÜST BÖLÜM ================= -->
+<header class="ust">
+  <div class="isiklar" id="isiklar" aria-hidden="true"></div>
+  <p class="start-yazisi" id="startYazisi" aria-live="polite">&nbsp;</p>
 
-  <article class="card" id="card">
-    <div class="photo">
-      <div class="tagline" aria-hidden="true"><span>SAÜ</span><span>Rookie · 2026</span></div>
-      <span class="num">33</span>
-      <div class="drv" aria-hidden="true">KAYAPINAR</div>
-      <!-- Fotoğraf eklemek için: <img src="foto.jpg" alt="Mustafa Emir Kayapınar"> -->
+  <article class="kart gizli">
+    <div class="numara-paneli">
+      <div class="panel-ust" aria-hidden="true"><span>SAÜ</span><span>Rookie · 2026</span></div>
+      <span class="numara">33</span>
+      <div class="panel-isim" aria-hidden="true">KAYAPINAR</div>
     </div>
-    <div class="info">
-      <span class="code"><b>KAY</b> Pilot kartı · 2026</span>
+
+    <div class="bilgi">
+      <span class="kod"><b>KAY</b> Pilot kartı · 2026</span>
       <h1>Mustafa Emir Kayapınar</h1>
-      <p class="team">Takım: Sakarya Üniversitesi · Bilgisayar Mühendisliği, 2. sınıf</p>
-      <p style="margin:0">Kendimi bir F1 aracı gibi görüyorum: hızlı karar veren, baskı altında performans gösteren ve tek başına değil, güçlü bir pit ekibiyle kazanan biri.</p>
-      <div class="facts">
-        <div class="fact"><span>Motor</span><strong>Rekabet</strong></div>
-        <div class="fact"><span>İlham</span><strong>Abu Dabi 2021</strong></div>
-        <div class="fact"><span>Hedef</span><strong>SAÜ'nün kanatları</strong></div>
+      <p class="takim">Takım: Sakarya Üniversitesi · Bilgisayar Mühendisliği, 2. sınıf</p>
+      <p>Kendimi bir F1 aracı gibi görüyorum: hızlı karar veren, baskı altında performans gösteren ve tek başına değil, güçlü bir pit ekibiyle kazanan biri.</p>
+      <div class="ozellikler">
+        <div class="ozellik"><span>Motor</span><strong>Rekabet</strong></div>
+        <div class="ozellik"><span>İlham</span><strong>Abu Dabi 2021</strong></div>
+        <div class="ozellik"><span>Hedef</span><strong>SAÜ'nün kanatları</strong></div>
       </div>
     </div>
   </article>
 </header>
-<div class="kerb"></div>
 
-<section class="band">
-  <div class="wrap">
-    <h2>Garajım</h2>
-    <p class="lead">Bir yarışı tek başına kimse kazanmaz. İşte beni hızlandıran parçalar.</p>
-    <div class="grid">
-      <div class="box">
-        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div>
-        <h3>Motor</h3>
-        <p>Rekabet. Bir hedef koyduğumda son tura kadar gaz veririm. Kazanmayı ama en çok birlikte kazanmayı severim.</p>
-      </div>
-      <div class="box">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/></svg></div>
-        <h3>Pit ekibim</h3>
-        <p>Kampüsteki toplulukların yönetiminde arkadaşlarım var. İş birliği bir mesaj uzaklığında.</p>
-        <div class="chips"><span>SAU Formula</span><span>SAU Espor</span><span>Veri Bilimi</span><span>GEEK</span><span>Bilgisayar Topluluğu</span></div>
-      </div>
-      <div class="box">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M8 13l3 3 5-6"/><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0"/></svg></div>
-        <h3>Özel yeteneğim</h3>
-        <p>Kapıyı çalmaktan çekinmem. Geçen yaz Sivas'ta iki firmayla yüz yüze görüşüp web sitesi projesi için kendimi anlattım ve süreci takip ediyorum.</p>
-      </div>
-      <div class="box">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div>
-        <h3>Mühendis gözü</h3>
-        <p>Bir etkinliği yapmakla kalmam, ölçerim: kaç kişi geldi, kaç kutu dağıtıldı, kaç paylaşım oldu. Bir sonraki tur daha hızlı olsun diye.</p>
+<!-- Işıklar sönene kadar aşağıdaki her şey gizli (.gizli) -->
+<main class="gizli">
+  <div class="kerb"></div>
+
+  <!-- ================= GARAJIM ================= -->
+  <section class="bant">
+    <div class="kutu-genislik">
+      <h2>Garajım</h2>
+      <p class="giris">Bir yarışı tek başına kimse kazanmaz. İşte beni hızlandıran parçalar.</p>
+      <div class="izgara">
+        <div class="kutu">
+          <div class="ikon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div>
+          <h3>Motor</h3>
+          <p>Rekabet. Bir hedef koyduğumda son tura kadar gaz veririm. Kazanmayı ama en çok birlikte kazanmayı severim.</p>
+        </div>
+        <div class="kutu">
+          <div class="ikon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/></svg></div>
+          <h3>Pit ekibim</h3>
+          <p>Kampüsteki toplulukların yönetiminde arkadaşlarım var. İş birliği bir mesaj uzaklığında.</p>
+          <div class="etiketler"><span>SAU Formula</span><span>SAU Espor</span><span>Veri Bilimi</span><span>GEEK</span><span>Bilgisayar Topluluğu</span></div>
+        </div>
+        <div class="kutu">
+          <div class="ikon"><svg viewBox="0 0 24 24"><path d="M8 13l3 3 5-6"/><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0"/></svg></div>
+          <h3>Özel yeteneğim</h3>
+          <p>Kapıyı çalmaktan çekinmem. Geçen yaz Sivas'ta iki firmayla yüz yüze görüşüp web sitesi projesi için kendimi anlattım ve süreci takip ediyorum.</p>
+        </div>
+        <div class="kutu">
+          <div class="ikon"><svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div>
+          <h3>Mühendis gözü</h3>
+          <p>Bir etkinliği yapmakla kalmam, ölçerim: kaç kişi geldi, kaç kutu dağıtıldı, kaç paylaşım oldu. Bir sonraki tur daha hızlı olsun diye.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="band" style="padding-top:0">
-  <div class="wrap">
-    <h2>Yarış geçmişim</h2>
-    <p class="lead">Beni bu piste getiren turlar.</p>
-    <ol class="track">
-      <li data-lap="T1"><span class="when">Aralık 2021</span><h3>Abu Dabi'de son tur</h3><p>Max Verstappen'in son turda şampiyonluğu alışını izledim. O gece öğrendiğim şey: yarış bitmeden hiçbir şey bitmez, pes etmek yok.</p></li>
-      <li data-lap="T2"><span class="when">2025</span><h3>Kendi biyografi sitemi yaptım</h3><p>Kendimi anlatan bir web sitesi tasarlayıp yayına aldım. Fikri koda dökmeyi o zaman sevdim; bu sayfa da onun devamı.</p></li>
-      <li data-lap="T3"><span class="when">Yaz 2026</span><h3>Sivas'ta ilk müşteri görüşmelerim</h3><p>Geçen yaz web sitesi ihtiyacı olan bir asansör firması ve bir otomotiv firmasıyla birebir görüştüm, kendimi ve fikirlerimi anlattım. Süreç devam ediyor, takipteyim.</p></li>
-      <li data-lap="T4"><span class="when">2026</span><h3>Red Bull Wings Cup'a ekip götürdüm</h3><p>Arkadaş gruplarına tek tek yazdım, saatleri ayarladım ve 7–8 kişilik bir ekiple Red Bull Wings Cup'a katıldık. İnsanları bir hedef etrafında toplamak beni en çok heyecanlandıran şey.</p></li>
-    </ol>
+  <!-- ================= YARIŞ GEÇMİŞİM ================= -->
+  <section class="bant" style="padding-top:0">
+    <div class="kutu-genislik">
+      <h2>Yarış geçmişim</h2>
+      <p class="giris">Beni bu piste getiren turlar.</p>
+      <ol class="pist">
+        <li data-tur="T1">
+          <span class="tarih">Aralık 2021</span>
+          <h3>Abu Dabi'de son tur</h3>
+          <p>Max Verstappen'in son turda şampiyonluğu alışını izledim. O gece öğrendiğim şey: yarış bitmeden hiçbir şey bitmez, pes etmek yok.</p>
+        </li>
+        <li data-tur="T2">
+          <span class="tarih">2025</span>
+          <h3>Kendi biyografi sitemi yaptım</h3>
+          <p>Kendimi anlatan bir web sitesi tasarlayıp yayına aldım. Fikri koda dökmeyi o zaman sevdim; bu sayfa da onun devamı.</p>
+        </li>
+        <li data-tur="T3">
+          <span class="tarih">Yaz 2026</span>
+          <h3>Sivas'ta ilk müşteri görüşmelerim</h3>
+          <p>Geçen yaz web sitesi ihtiyacı olan bir asansör firması ve bir otomotiv firmasıyla birebir görüştüm, kendimi ve fikirlerimi anlattım. Süreç devam ediyor, takipteyim.</p>
+        </li>
+        <li data-tur="T4">
+          <span class="tarih">2026</span>
+          <h3>Red Bull Wings Cup'a ekip götürdüm</h3>
+          <p>Arkadaş gruplarına tek tek yazdım, saatleri ayarladım ve 7–8 kişilik bir ekiple Red Bull Wings Cup'a katıldık. İnsanları bir hedef etrafında toplamak beni en çok heyecanlandıran şey.</p>
+        </li>
+      </ol>
 
-    <h3 style="font:700 22px 'Titillium Web';margin:18px 0 0">Bu sezonki yarışım: Student Marketeer</h3>
-    <div class="laps">
-      <div class="lap"><b>✓</b>Başvuru formu</div>
-      <div class="lap"><b>✓</b>Red Bull testi</div>
-      <div class="lap"><b>✓</b>Online mülakat</div>
-      <div class="lap"><b>✓</b>Yüz yüze mülakat</div>
-      <div class="lap now"><b>🏁</b>Case study</div>
+      <h3 class="sezon-baslik">Bu sezonki yarışım: Student Marketeer</h3>
+      <div class="turlar">
+        <div class="tur"><b>✓</b>Başvuru formu</div>
+        <div class="tur"><b>✓</b>Red Bull testi</div>
+        <div class="tur"><b>✓</b>Online mülakat</div>
+        <div class="tur"><b>✓</b>Yüz yüze mülakat</div>
+        <div class="tur simdi"><b>🏁</b>Case study</div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="kerb"></div>
-<section class="band next">
-  <div class="wrap">
-    <div>
-      <h2>Sıradaki yarışım</h2>
-      <p>Sakarya Üniversitesi'nde Red Bull'u kampüsle en alakalı marka yapmak. Doğru anda, doğru yerde: sınav gecesi kütüphane çıkışında, öğle arası Çınaraltı'nda, akşamüstü Helikopter pistinde.</p>
-      <p>Pit ekibim hazır, lastikler ısındı. Işıklar sönünce gaza basmak için sabırsızlanıyorum.</p>
+  <div class="kerb"></div>
+
+  <!-- ================= SIRADAKİ YARIŞIM ================= -->
+  <section class="bant siradaki">
+    <div class="kutu-genislik">
+      <div>
+        <h2>Sıradaki yarışım</h2>
+        <p>Sakarya Üniversitesi'nde Red Bull'u kampüsle en alakalı marka yapmak. Doğru anda, doğru yerde: sınav gecesi kütüphane çıkışında, öğle arası Çınaraltı'nda, akşamüstü Helikopter pistinde.</p>
+        <p>Pit ekibim hazır, lastikler ısındı. Işıklar sönünce gaza basmak için sabırsızlanıyorum.</p>
+      </div>
+      <div class="bayrak" aria-hidden="true"></div>
     </div>
-    <div class="flag" aria-hidden="true"></div>
-  </div>
-</section>
+  </section>
 
-<footer>Mustafa Emir Kayapınar · Red Bull Student Marketeer case study için hazırladım<br>Kişisel bir sayfadır, Red Bull ile resmi bir bağlantısı yoktur.</footer>
+  <footer>
+    Mustafa Emir Kayapınar · Red Bull Student Marketeer case study için hazırladım<br>
+    Kişisel bir sayfadır, Red Bull ile resmi bir bağlantısı yoktur.
+  </footer>
+</main>
 
 <script>
 {
-  const wrap=document.getElementById('lights'),go=document.getElementById('go'),card=document.getElementById('card');
-  wrap.innerHTML=Array.from({length:5},()=>'<div class="pod"><div class="l"></div><div class="l"></div></div>').join('');
-  const pods=[...wrap.querySelectorAll('.pod')];
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const show=()=>{card.classList.add('in')};
-  if(reduce){go.textContent='Işıklar söndü, yarış başladı!';show();}
-  else{
-    pods.forEach((p,i)=>setTimeout(()=>p.querySelectorAll('.l').forEach(l=>l.classList.add('on')),400+i*600));
-    setTimeout(()=>{pods.forEach(p=>p.querySelectorAll('.l').forEach(l=>l.classList.remove('on')));go.textContent='Işıklar söndü, yarış başladı!';show();},400+5*600+700);
+  // ---------------------------------------------------------
+  // START IŞIKLARI
+  // 5 sütun sırayla yanar, sonra hepsi birden söner.
+  // Işıklar sönünce kart ve aşağıdaki bilgiler görünür olur.
+  // ---------------------------------------------------------
+  const SUTUN_SAYISI  = 5;
+  const ILK_BEKLEME   = 400;  // ilk ışık yanmadan önce (ms)
+  const ISIK_ARALIGI  = 600;  // iki ışık arası süre (ms)
+  const SONME_BEKLEME = 700;  // son ışıktan sonra sönmeye kadar (ms)
+
+  const isiklar     = document.getElementById('isiklar');
+  const startYazisi = document.getElementById('startYazisi');
+
+  // Lambaları oluştur: her sütunda 2 lamba
+  for (let i = 0; i < SUTUN_SAYISI; i++) {
+    const sutun = document.createElement('div');
+    sutun.className = 'sutun';
+    sutun.innerHTML = '<div class="lamba"></div><div class="lamba"></div>';
+    isiklar.appendChild(sutun);
+  }
+  const sutunlar = [...isiklar.querySelectorAll('.sutun')];
+
+  function sutunuYak(sutun) {
+    sutun.querySelectorAll('.lamba').forEach(lamba => lamba.classList.add('yandi'));
+  }
+
+  function isiklariSondur() {
+    document.querySelectorAll('.lamba').forEach(lamba => lamba.classList.remove('yandi'));
+    startYazisi.textContent = 'Işıklar söndü, yarış başladı!';
+    // Gizli içeriği göster ve kaydırmayı aç
+    document.documentElement.classList.remove('isiklar-yaniyor');
+  }
+
+  const hareketIstemiyor = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (hareketIstemiyor) {
+    isiklariSondur();
+  } else {
+    sutunlar.forEach((sutun, i) => {
+      setTimeout(() => sutunuYak(sutun), ILK_BEKLEME + i * ISIK_ARALIGI);
+    });
+    setTimeout(isiklariSondur, ILK_BEKLEME + SUTUN_SAYISI * ISIK_ARALIGI + SONME_BEKLEME);
   }
 }
 </script>
